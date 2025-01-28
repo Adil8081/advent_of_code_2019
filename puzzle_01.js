@@ -99,7 +99,7 @@ const rawData = `144968
 79540
 143154`;
 
-const masses = massString.split("\n").map((mass) => Number(mass));
+const masses = rawData.split("\n").map((mass) => Number(mass));
 
 const calculateFuel = (mass) => {
   return Math.floor(mass / 3) - 2;
