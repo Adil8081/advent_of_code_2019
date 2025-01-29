@@ -99,14 +99,37 @@ const rawData = `144968
 79540
 143154`;
 
+// Part - 1
+
 const masses = rawData.split("\n").map((mass) => Number(mass));
 
 const calculateFuel = (mass) => {
   return Math.floor(mass / 3) - 2;
 };
 
-const sumOfRequiredFuel = masses.reduce(
-  (totalSum, mass) => totalSum + calculateFuel(mass),
+const requiredFuel = masses.map((mass) => calculateFuel(mass));
+
+// const sumOfRequiredFuel = requiredFuel.reduce(
+//   (totalSum, fuel) => totalSum + fuel,
+//   0
+// );
+
+// console.log(sumOfRequiredFuel);
+
+// Part - 2
+
+const additionalFuel = (fuelMass) => {
+  const extraFuel = calculateFuel(fuelMass);
+
+  if (extraFuel <= 0) {
+    return 0;
+  }
+
+  return extraFuel + additionalFuel(extraFuel);
+};
+
+const sumOfRequiredFuel = requiredFuel.reduce(
+  (totalSum, fuelMass) => totalSum + fuelMass + additionalFuel(fuelMass),
   0
 );
 
